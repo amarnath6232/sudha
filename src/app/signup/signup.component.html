@@ -51,16 +51,20 @@
                 <div class="input-group-prepend"><span class="input-group-text"><i
                       class="material-icons">email</i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" autocomplete="off"
-                  formControlName="email">
+                <input class="form-control" placeholder="Email" type="email" autocomplete="off" formControlName="email"
+                  (keyup)="isEmailExisted()" maxlength="40">
               </div>
               <div *ngIf="f.email.invalid && f.email.touched" class="text-danger">
                 <div *ngIf="f.email.errors?.required">
                   <small>Email is required</small>
                 </div>
+
                 <div *ngIf="f.email.errors?.pattern">
                   <small>Mail must be valid email</small>
                 </div>
+              </div>
+              <div *ngIf="alreadyExistEmail" class="text-danger">
+                <small>{{emailexistError}}</small>
               </div>
             </span>
             <!-- Phone number -->
@@ -70,7 +74,7 @@
                       class="material-icons">call</i></span>
                 </div>
                 <input class="form-control" placeholder="PhoneNumber" type="phoneNumber" autocomplete="off"
-                  formControlName="phoneNumber" minlength="10" maxlength="10">
+                  formControlName="phoneNumber" minlength="10" maxlength="10" appNumbersOnly>
               </div>
               <div *ngIf="f.phoneNumber.invalid && f.phoneNumber.touched" class="text-danger">
                 <div *ngIf="f.phoneNumber.errors?.required">
@@ -94,6 +98,9 @@
                 <div *ngIf="f.password.errors?.required">
                   <small>Password is required</small>
                 </div>
+                <div *ngIf="f.password.errors?.minlength">
+                  <small>Password must be atleast 8 characters long</small>
+                </div>
               </div>
             </span>
 
@@ -111,6 +118,9 @@
                 <div *ngIf="f.confirmPassword.errors?.required">
                   <small>Confirm Password is required</small>
                 </div>
+                <div *ngIf="f.confirmPassword.errors?.mustMatch">
+                  <small>Password and Confirm Password does not match</small>
+                </div>
               </div>
             </span>
 
@@ -120,7 +130,10 @@
                 <div class="input-group-prepend"><span class="input-group-text"><i
                       class="material-icons">date_range</i></span>
                 </div>
-                <input class="form-control" placeholder="dob" type="date" formControlName="dob">
+                <input matInput [matDatepicker]="picker" class="form-control" placeholder="dob" name="dob"
+                  formControlName="dob">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
               </div>
               <div *ngIf="f.dob.invalid && f.dob.touched" class="text-danger">
                 <div *ngIf="f.dob.errors?.required">
@@ -135,7 +148,7 @@
                 routerLinkActive="router-link-active"> Sign In </button>
             </div>
             <div class="card-footer">
-              <button class="btn btn-rose btn-link btn-lg" [disabled]="signupForm.invalid">
+              <button class="btn btn-rose btn-link btn-lg" [disabled]="signupForm.invalid || alreadyExistEmail">
                 <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Sign Up
               </button>

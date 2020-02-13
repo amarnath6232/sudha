@@ -7,7 +7,7 @@ import { SampleService } from 'app/Services/sample.service';
 @Injectable()
 export class TableListResolverService implements Resolve<signUp[]> {
 
-  constructor(private tablelist:SampleService) { }
+  constructor(private tablelist: SampleService) { }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<signUp[]> | Promise<signUp[]> | signUp[] {
     return this.tablelist.getUser();
   }

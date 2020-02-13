@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { SampleService } from 'app/Services/sample.service';
 import { Router } from '@angular/router';
+import { MustMatch } from './mustMatch';
+import { Toaster } from 'app/share/global';
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  alreadyExistEmail: boolean = false;
+  emailexistError = '';
+  toaster: Toaster = new Toaster();
+
 
   spin = false;
   ErrMsg = '';
@@ -20,7 +26,10 @@ export class SignupComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
     dob: ['', [Validators.required]]
-  });
+  }, {
+    validator: MustMatch('password', 'confirmPassword')
+  }
+  );
 
   constructor(private fb: FormBuilder,
     private sam: SampleService,
@@ -33,6 +42,25 @@ export class SignupComponent implements OnInit {
   get f() {
     return this.signupForm.controls;
   }
+
+  isEmailExisted() {
+    if (this.signupForm.controls['email'].value > 6) {
+      this.sam.isEmail(this.signupForm.controls['email'].value).subscribe(
+        () => {
+          this.emailexistError = '';
+          this.alreadyExistEmail = false;
+          return false
+        }, (err) => {
+          if (err.status == 501) {
+            this.emailexistError = err.error.message;
+            this.alreadyExistEmail = true;
+            return true;
+          }
+        }
+      )
+    }
+
+  }
   signup() {
     this.spin = true;
     this.sam.Security(this.signupForm.value).subscribe(
@@ -44,11 +72,10 @@ export class SignupComponent implements OnInit {
         this.spin = false;
         console.log(err);
         if (err.status == 500)
-          /*  this.ErrMsg = "Back end server is not responding"; */
-          alert("Server is not responding")
+          this.toaster.error("Server is not responding");
+          
 
       }
     )
-
   }
 }

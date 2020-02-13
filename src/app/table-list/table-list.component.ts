@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { signUp } from 'app/Model/model';
 import { SampleService } from 'app/Services/sample.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Toaster } from 'app/share/global';
 
 @Component({
   selector: 'app-table-list',
@@ -18,9 +19,11 @@ export class TableListComponent implements OnInit {
   user: signUp; //Update action
   deluser: signUp; //Delete action
   displayedColumns: string[] = ['name', 'designation', 'email', 'phoneNumber', 'dob', 'actions'];
+  toaster: Toaster = new Toaster();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   dataSource = new MatTableDataSource<signUp>(this.userData);
   constructor(private sample: SampleService,
     private route: ActivatedRoute,
@@ -55,7 +58,6 @@ export class TableListComponent implements OnInit {
   edit(userData: signUp) {
     this.user = userData;
     console.log(userData);
-
   }
 
 
@@ -65,10 +67,9 @@ export class TableListComponent implements OnInit {
     this.email = userData.email
   }
   delete(id) {
-
     this.sample.deleteUser(id).subscribe(res => {
       console.log(res);
-      alert("User deleted");
+      this.toaster.success("User deleted");
       this.ngOnInit();
     }, err => {
       console.log(err);
@@ -76,17 +77,19 @@ export class TableListComponent implements OnInit {
 
   }
 
-  update() {
-    this.sample.updateUser(this.user).subscribe(
-      (res) => {
-        console.log(res);
-        alert("User updated Successfully");
-      },
-      (err) => {
-        console.log(err);
-      }
-    )
-  }
+
+
+  /*   update() {
+      this.sample.updateUser(this.user).subscribe(
+        (res) => {
+          console.log(res);
+          alert("User updated Successfully");
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    } */
 
 
 }

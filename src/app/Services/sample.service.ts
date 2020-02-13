@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IpService } from './ip.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { signUp } from 'app/Model/model';
+import { signUp, Minikit } from 'app/Model/model';
 import { catchError } from 'rxjs/operators';
 
 
@@ -15,8 +15,9 @@ export class SampleService {
   editUser = new BehaviorSubject<signUp>(null);
 
   baseUrl = this.ip.ip + ":3000/security";
-  getUsers = this.ip.ip + ":3000";
-  constructor(private ip: IpService,
+  minikitdata = this.ip.ip + ":3000/users"
+    getUsers = this.ip.ip + ":3000";
+    constructor(private ip: IpService,
     private http: HttpClient) { }
 
   Security(register: signUp): Observable<signUp> {
@@ -26,10 +27,16 @@ export class SampleService {
     );
   }
 
+  isEmail(email): Observable<string> {
+    console.log(email);
+    return this.http.post<string>(this.baseUrl + '/signin/email', { email: email }).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   login(email: string, password: string) {
     //console.log(login);
-    return this.http.post(this.baseUrl + '/signin', { email, password }).pipe(catchError(this.handleError))
+    return this.http.post(this.baseUrl + '/signin', {email, password }).pipe(catchError(this.handleError))
   }
 
 
@@ -44,6 +51,24 @@ export class SampleService {
   updateUser(register: signUp) {
     return this.http.put(this.getUsers + '/users/update/', register).pipe(catchError(this.handleError))
   }
+
+  //Minikit
+  postMinikit(minikit: Minikit): Observable<Minikit> {
+    return this.http.post<Minikit>(this.minikitdata + '/minikit', minikit).pipe(catchError(this.handleError))
+  }
+
+  getMinikit(): Observable<Minikit[]> {
+    return this.http.get<Minikit[]>(this.minikitdata + '/minikit').pipe(catchError(this.handleError))
+  }
+
+  updateMinikit(minikit: Minikit) {
+    return this.http.put(this.minikitdata + '/minikit/update/', minikit).pipe(catchError(this.handleError))
+  }
+
+  deleteminikit(id) {
+    return this.http.delete(this.minikitdata + `/minikit/delete/${id}`).pipe(catchError(this.handleError))
+  }
+
 
 
   private handleError(error: HttpErrorResponse) {

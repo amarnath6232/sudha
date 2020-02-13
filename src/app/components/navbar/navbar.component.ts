@@ -133,6 +133,4 @@ export class NavbarComponent implements OnInit {
         let logout = new Logout(this.router,this.auth);
         logout.logout();
     }
-
-
 }

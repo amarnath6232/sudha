@@ -1,0 +1,27 @@
+ .mat-table {
+   width: 100%;
+ }
+
+ /*  .mat-header-cell,
+ .mat-sort-header-sorted {
+
+   color: black;
+     background-color: #d7e2f1;
+   width: 10%;
+
+ }
+ */
+ .mat-elevation-z8 {
+   text-overflow: auto;
+ }
+/* 
+ .mat-button {
+   background-color: rgb(97, 92, 92);
+   margin-right: 2px;
+ } */
+
+ @media (min-width: 320px) and (max-width: 767px) {
+   .mat-elevation-z8 {
+     overflow-y: auto;
+   }
+ }

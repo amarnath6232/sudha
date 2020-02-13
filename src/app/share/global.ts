@@ -31,7 +31,7 @@ export class Toaster {
         });
     }
 
-    danger(message: string) {
+    error(message: string) {
         $.notifyClose();
         $.notify({
             icon: "add_alert",

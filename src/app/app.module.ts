@@ -12,6 +12,9 @@ import { AppComponent } from './app.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+/* import { EditMinikitComponent } from './edit-minikit/edit-minikit.component'; */
+/* import { EditTableComponent } from './edit-table/edit-table.component'; */
+
 
 
 @NgModule({
@@ -32,6 +35,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+
+
+
   ],
   providers: [],
   /*  schemas: [CUSTOM_ELEMENTS_SCHEMA], */

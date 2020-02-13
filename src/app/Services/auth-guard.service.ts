@@ -17,7 +17,7 @@ export class AuthGaurdService implements CanActivate {
     const currentUser = this.authenticationService.token;
     if (currentUser != null) {
       return true;
-    } 
+    }
     // not logged in so redirect to login page with the return url
     this.router.navigate(['/signIn']);
     return false;

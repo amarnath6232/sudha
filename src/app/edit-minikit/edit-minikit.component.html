@@ -1,0 +1,81 @@
+<div class="modal fade" id="editMinikit" tabindex="-1" role="dialog" aria-labelledby="tryModalTitle" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Minikit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&#10005;</span>
+        </button>
+      </div>
+
+      <div class="modal-body p-4" *ngIf="minikit">
+        <form>
+          <!-- AssessmentYear -->
+          <div class="form-group row">
+            <label for="name" class="col-sm-4 col-form-label">AssessmentYear</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="assessmentYear" name="assessmentYear"
+                [(ngModel)]="minikit.assessmentYear" #assessmentYear="ngModel" required>
+            </div>
+          </div>
+
+          <!--Fld  -->
+          <div class="form-group row">
+            <label for="designation" class="col-sm-4 col-form-label">Fld</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="fld" name="fld" [(ngModel)]="minikit.fld" #fld="ngModel"
+                required>
+            </div>
+          </div>
+
+          <!-- nameOfFarmer -->
+          <div class="form-group row">
+            <label for="email" class="col-sm-4 col-form-label">NameOfFarmer</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="nameOfFarmer" name="nameOfFarmer"
+                [(ngModel)]="minikit.nameOfFarmer" #nameOfFarmer="ngModel" required>
+            </div>
+          </div>
+
+          <!-- village -->
+          <div class="form-group row">
+            <label for="phoneNumber" class="col-sm-4 col-form-label">Village</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="village" name="village" [(ngModel)]="minikit.village"
+                #village="ngModel" required>
+            </div>
+          </div>
+
+          <!-- season -->
+          <div class="form-group row">
+            <label for="dob" class="col-sm-4 col-form-label">Season</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="season" name="season" [(ngModel)]="minikit.season"
+                #season="ngModel" required>
+            </div>
+          </div>
+
+          <!-- Document Eviodence -->
+          <div class="form-group row">
+            <label for="dob" class="col-sm-4 col-form-label">DocumentoryEvidence</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="documentoryEvidence" name="documentoryEvidence"
+                [(ngModel)]="minikit.documentoryEvidence" #documentoryEvidence="ngModel" required>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer mx-5">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-2 text-center">
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="updateMinikit()">Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

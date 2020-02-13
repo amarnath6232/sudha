@@ -1,0 +1,109 @@
+<div class="main-content">
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 ml-auto mr-auto">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Minikit</h4>
+          </div>
+          <div class="card-body">
+            <mat-card class="my-card">
+              <mat-card-content>
+                <form class="text-center" [formGroup]="miniForm" (ngSubmit)=" minikitData()">
+                  <mat-form-field class="full-width">
+                    <mat-label>Assessment Year</mat-label>
+                    <input matInput placeholder="Assessment Year" name="assessmentYear" formControlName="assessmentYear"
+                      minlength="4" maxlength="4">
+                    <mat-error *ngIf="f.assessmentYear?.touched" class="text-danger">
+                      <mat-error *ngIf="f.assessmentYear.errors?.required">
+                        <small>Assessment Year is required</small>
+                      </mat-error>
+                      <mat-error *ngIf="f.assessmentYear.errors?.minlength">
+                        <small>Assessment Year must be atleast 4 numerics</small>
+                      </mat-error>
+                      <mat-error *ngIf="f.assessmentYear.errors?.pattern">
+                        <small>Assessment Year allows only numerics</small>
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <mat-label>Fld</mat-label>
+                    <input matInput placeholder="fld" name="fld" formControlName="fld">
+                    <mat-error *ngIf="f.fld?.touched" class="text-danger">
+                      <mat-error *ngIf="f.fld.errors?.required">
+                        <small>Fld is required</small>
+                      </mat-error>
+                      <!-- <mat-error *ngIf="designation.errors?.pattern">
+                <small>Designation allows only alphabtics</small>
+              </mat-error> -->
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <mat-label>Name Of Farmer</mat-label>
+                    <input matInput placeholder="nameOfFarmer" name="nameOfFarmer" formControlName="nameOfFarmer">
+                    <mat-error *ngIf="f.nameOfFarmer?.touched" class="text-danger">
+                      <mat-error *ngIf="f.nameOfFarmer.errors?.required">
+                        <small>Name Of Farmer is required</small>
+                      </mat-error>
+                      <mat-error *ngIf="f.nameOfFarmer.errors?.pattern">
+                        <small>Name Of Farmer allows only characters</small>
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <mat-label>Village</mat-label>
+                    <input matInput placeholder="village" name="village" formControlName="village">
+                    <mat-error *ngIf="f.village?.touched" class="text-danger">
+                      <mat-error *ngIf="f.village.errors?.required">
+                        <small>Village is required</small>
+                      </mat-error>
+                      <mat-error *ngIf="f.village.errors?.pattern">
+                        <small>Village allows only characters</small>
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <mat-label>Season</mat-label>
+                    <input matInput placeholder="season" name="season" formControlName="season">
+                    <mat-error *ngIf="f.season?.touched" class="text-danger">
+                      <mat-error *ngIf="f.season.errors?.required">
+                        <small>Season is required</small>
+                      </mat-error>
+                      <mat-error *ngIf="f.season.errors?.required">
+                        <small>Season allows numerics and characters</small>
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <mat-label>Documentory Evidence</mat-label>
+                    <input matInput placeholder="documentoryEvidence" name="documentoryEvidence"
+                      formControlName="documentoryEvidence">
+                    <mat-error *ngIf="f.documentoryEvidence?.touched" class="text-danger">
+                      <mat-error *ngIf="f.documentoryEvidence.errors?.required">
+                        <small>documentoryEvidence is required</small>
+                      </mat-error>
+                      <mat-error *ngIf="f.documentoryEvidence.errors?.pattern">
+                        <small>documentoryEvidence allows numerics and characters</small>
+                      </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-card-actions>
+                    <button mat-raised-button [disabled]="miniForm.invalid" class="btn btn-register btn-block">
+                      <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                      Save
+                    </button>
+                    <button (click)="onPrint()" class="button">Print</button>
+                    <!--   <button (click)=" print()" class="button">Print</button> -->
+                  </mat-card-actions>
+                </form>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

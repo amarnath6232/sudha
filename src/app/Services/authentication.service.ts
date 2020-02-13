@@ -16,8 +16,7 @@ export class AuthenticationService {
   authenticatedUser: any;
   rolebase: string = null;
   islogin: boolean = false;
-  baseUrl = this.ip.ip + ":2138/dristiaadmintask/users/signin";
-  // baseUrl = this.ip.ip + ":2137/admintask/users/signin";
+  baseUrl = this.ip.ip + ":3000/security";
   userName = null;
   token: string = localStorage.getItem('token') || null;
   refresh_Token = null;
@@ -65,26 +64,30 @@ export class AuthenticationService {
   // }
 
 
-  authenticate(username: string, password: string) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json;');
-    return this.http.post(`${this.baseUrl}`, { username, password }, { headers }).pipe(map(res => {
-      if (res) {
-        console.log(res);
-        this.token = res['token'];
-        // this.decodeToken();
-        const email = res['email'];
-        localStorage.setItem('token', this.token);
-        localStorage.setItem('email', email);
-        // this.datashare.email.next(email);
-        // console.log("datashare.email ", this.datashare.email);
-        this.islogin = Boolean(this.rolebase);
-        return true;
-      }
-      else
-        return false;
-    }), catchError(this.errHandler.handleError));
-  }
+  /*   authenticate(email: string, password: string) {
+      const headers = new HttpHeaders().set('Content-Type', 'application/json;');
+      return this.http.post(`${this.baseUrl}`, { email, password }, { headers }).pipe(map(res => {
+        if (res) {
+          console.log(res);
+          this.token = res['token'];
+          // this.decodeToken();
+          const email = res['email'];
+          localStorage.setItem('token', this.token);
+          localStorage.setItem('email', email);
+          // this.datashare.email.next(email);
+          // console.log("datashare.email ", this.datashare.email);
+          this.islogin = Boolean(this.rolebase);
+          return true;
+        }
+        else
+          return false;
+      }), catchError(this.errHandler.handleError));
+    }
+   */
 
+  authenticate(email: string, password: string) {
+    return this.http.post(this.baseUrl + '/signin', { email, password }).pipe(catchError(this.errHandler.handleError));
+  }
 
   /* without login */
   forgotPassword(userName) {

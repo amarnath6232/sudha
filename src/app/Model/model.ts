@@ -8,3 +8,22 @@ export interface signUp {
     confirmPassword: string;
     dob: string;
 }
+
+export interface Minikit {
+    _id?: string;
+    assessmentYear: string;
+    fld: string;
+    nameOfFarmer: string;
+    village: string;
+    season: string;
+    documentoryEvidence: string;
+}
+
+export interface Techenical {
+    assessmentYear: string;
+    oft: string;
+    nameOfFarmer: string;
+    village: string;
+    season: string;
+    documentoryEvidence: string;
+}

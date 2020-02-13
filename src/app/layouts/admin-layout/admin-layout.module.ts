@@ -31,8 +31,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TableListResolverService } from 'app/table-list/table-list-resolver.service';
+import { MiniktComponent } from 'app/minikt/minikt.component';
+import { ListMinikitComponent } from 'app/list-minikit/list-minikit.component';
+import { EditTableModule } from 'app/edit-table/edit-table.module';
+import { EditMinikitModule } from 'app/edit-minikit/edit-minikit.module';
+import { ListMinikitResolverService } from 'app/list-minikit/list-minikit-resolver.service';
 @NgModule({
   imports: [
+    EditTableModule,
+    EditMinikitModule,
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
@@ -59,9 +66,12 @@ import { TableListResolverService } from 'app/table-list/table-list-resolver.ser
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    MiniktComponent,
+    ListMinikitComponent
   ],
   providers: [
     TableListResolverService,
+    ListMinikitResolverService,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
