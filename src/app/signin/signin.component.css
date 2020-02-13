@@ -1,0 +1,11 @@
+.bg {
+  background-image: url(/assets/img/sign_In_bg.jpg);
+  background-color: black;
+  background-size: 100% 100%;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bgcolor{
+  background-color: rgba(0, 0, 0, 0.3);
+}

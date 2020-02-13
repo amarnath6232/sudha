@@ -1,0 +1,45 @@
+<div class="bg">
+  <div class="row m-0 d-flex align-items-center h-100 bgcolor">
+    <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+      <form class="form" [formGroup]="LoginForm" (ngSubmit)="onSignIn()">
+        <div class="card card-login">
+          <div class="card-header card-header-rose text-center">
+            <h4 class="card-title">Log in</h4>
+          </div>
+          <div class="card-body ">
+
+            <!-- email -->
+            <span class="bmd-form-group">
+              <div class="input-group my-4">
+                <div class="input-group-prepend"><span class="input-group-text"><i
+                      class="material-icons">email</i></span>
+                </div>
+                <input class="form-control" placeholder="Email" type="email" autocomplete="off"
+                  formControlName="email">
+              </div>
+            </span>
+
+            <!-- password -->
+            <span class="bmd-form-group">
+              <div class="input-group my-2">
+                <div class="input-group-prepend"><span class="input-group-text"><i
+                      class="material-icons">lock_outline</i></span>
+                </div>
+                <input class="form-control" placeholder="Password" type="password" formControlName="password">
+              </div>
+            </span>
+
+          </div>
+          <div class="card-footer justify-content-between">
+            <button type="button" class="btn btn-rose btn-link btn-lg" [routerLink]="[ '/signUp']">
+              Sign Up
+            </button>
+            <button type="submit" class="btn btn-rose btn-link btn-lg" [disabled]="LoginForm.invalid">
+              Sign In
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
