@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, tap, take, map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 
 import { ErrorHandlerService } from './error-handler.service';
 import { IpService } from './ip.service';
@@ -16,15 +16,16 @@ export class AuthenticationService {
   authenticatedUser: any;
   rolebase: string = null;
   islogin: boolean = false;
-  baseUrl = this.ip.ip + ":3000/security";
+  baseUrl = this.ip.ip + ":3000/security/signin";
   userName = null;
   token: string = localStorage.getItem('token') || null;
   refresh_Token = null;
+  decoded: any;
 
   constructor(private http: HttpClient,
     private errHandler: ErrorHandlerService,
-    private ip: IpService,
-    private router: Router) {
+    private ip: IpService) {
+    this.decodeToken();
   }
 
 
@@ -32,76 +33,46 @@ export class AuthenticationService {
     return this.token;
   }
 
-  // refreshToken(): Observable<any> {
-  //   return this.http.get<any>(`${this.ip.ip}:2138/admintask/users/generateToken/${this.decoded.sub}`).pipe(take(1), tap(res => {
-  //     console.log(res);
-  //     if (res) {
-  //       this.refresh_Token = res['tokenName'];
-  //       console.log("refresh token");
-  //       console.log(this.refresh_Token);
-  //       if (this.refresh_Token) {
-  //         localStorage.setItem('token', this.refresh_Token);
-  //         this.token = this.refresh_Token;
-  //       }
-  //     }
-  //   }));
-  // }
-
-  // decodeToken(): boolean {
-  //   if (this.token != null && this.token != undefined && this.token.length != 0) {
-  //     this.decoded = jwt_decode(this.token);
-  //     /* Uppercase for username */
-  //     this.userName = this.decoded.sub.charAt(0).toUpperCase() + this.decoded.sub.slice(1);
-  //     console.log(this.decoded);
-  //     const role = this.decoded.auth[0].authority;
-  //     console.log(role);
-  //     this.rolebase = role;
-  //     this.islogin = Boolean(this.rolebase);
-  //     return true;
-  //   }
-  //   else
-  //     return false;
-  // }
-
-
-  /*   authenticate(email: string, password: string) {
-      const headers = new HttpHeaders().set('Content-Type', 'application/json;');
-      return this.http.post(`${this.baseUrl}`, { email, password }, { headers }).pipe(map(res => {
-        if (res) {
-          console.log(res);
-          this.token = res['token'];
-          // this.decodeToken();
-          const email = res['email'];
-          localStorage.setItem('token', this.token);
-          localStorage.setItem('email', email);
-          // this.datashare.email.next(email);
-          // console.log("datashare.email ", this.datashare.email);
-          this.islogin = Boolean(this.rolebase);
-          return true;
+  refreshToken(): Observable<any> {
+    return this.http.get<any>(`${this.ip.ip}:3000/security/refreshToken/${this.decoded.user}`).pipe(take(1), tap(res => {
+      console.log(res);
+      if (res) {
+        this.refresh_Token = res['token'];
+        console.log("refresh token");
+        console.log(this.refresh_Token);
+        if (this.refresh_Token) {
+          localStorage.setItem('token', this.refresh_Token);
+          this.token = this.refresh_Token;
         }
-        else
-          return false;
-      }), catchError(this.errHandler.handleError));
+      }
+    }));
+  }
+
+  decodeToken(): boolean {
+    if (this.token != null && this.token != undefined && this.token.length != 0) {
+      this.decoded = jwt_decode(this.token);
+      console.log(this.decoded);
+      return true;
     }
-   */
+    else
+      return false;
+  }
+
 
   authenticate(email: string, password: string) {
-    return this.http.post(this.baseUrl + '/signin', { email, password }).pipe(catchError(this.errHandler.handleError));
+    return this.http.post(`${this.baseUrl}`, { email, password }).pipe(map(res => {
+      if (res) {
+        console.log(res);
+        this.token = res['token'];
+        localStorage.setItem('token', this.token);
+        this.decodeToken();
+        return true;
+      }
+      else
+        return false;
+    }), catchError(this.errHandler.handleError));
   }
 
-  /* without login */
-  forgotPassword(userName) {
-    return this.http.post(`${this.ip.ip}:2138/admintask/users/forgotPassword/${userName}`, null)
-      .pipe(catchError(this.errHandler.handleError));
-  }
-
-  resetPassword(username: string, pwd: string) {
-    /* const responseType: Object = {
-      responseType: 'text'
-    } */
-    return this.http.put<any>(`${this.ip.ip}:2138/admintask/users/resetPassword/${username}`, { "newPassword": pwd })
-      .pipe(catchError(this.errHandler.handleError));
-  }
 
   logout() {
     localStorage.clear();

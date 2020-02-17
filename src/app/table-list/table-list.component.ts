@@ -12,6 +12,7 @@ import { Toaster } from 'app/share/global';
   templateUrl: './table-list.component.html',
   styleUrls: ['./table-list.component.css']
 })
+
 export class TableListComponent implements OnInit {
   userData: signUp[] = [];
   name;
@@ -59,7 +60,6 @@ export class TableListComponent implements OnInit {
     this.user = userData;
     console.log(userData);
   }
-
 
   deleteUser(userData: signUp) {
     this.deluser = userData;

@@ -14,7 +14,6 @@ import { SampleService } from 'app/Services/sample.service';
   styleUrls: ['./admin-layout.component.scss']
 })
 export class AdminLayoutComponent implements OnInit {
-    sidebar;
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
@@ -22,9 +21,6 @@ export class AdminLayoutComponent implements OnInit {
   constructor( public location: Location, private router: Router,public sample: SampleService) {}
 
     ngOnInit() {
-        this.sample.loggedIn.subscribe(val => {
-            this.sidebar = val;
-        })
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
       if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {

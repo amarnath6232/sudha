@@ -11,7 +11,6 @@ import { catchError } from 'rxjs/operators';
 })
 export class SampleService {
 
-  loggedIn = new BehaviorSubject(localStorage.getItem('login') == 'true');
   editUser = new BehaviorSubject<signUp>(null);
 
   baseUrl = this.ip.ip + ":3000/security";

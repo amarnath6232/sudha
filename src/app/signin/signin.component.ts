@@ -42,13 +42,10 @@ export class SigninComponent implements OnInit {
     if (!this.LoginForm.invalid) {
       this.auth.authenticate(this.LoginForm.controls['email'].value, this.LoginForm.controls['password'].value).subscribe(
         (res) => {
-          console.log(res);
-          localStorage.setItem("login", "true");
-          localStorage.setItem("token", res['token']);
-          this.auth.token = res['token'];
-          this.sample.loggedIn.next(true);
-          this.toaster.success("log In successfull");
-          this.router.navigate(['/dashboard']);
+          if(res){
+            this.toaster.success("log In successfull");
+            this.router.navigate(['/dashboard']);
+          }
         },
         (err) => {
           this.spin = false;

@@ -7,7 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthGaurdService } from './Services/auth-guard.service';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'signIn', pathMatch: 'full', },
+  { path: '', redirectTo: '', pathMatch: 'full', },
   { path: 'signIn', loadChildren: () => import('./signin/signin.module').then(m => m.SigninModule) },
   { path: 'signUp', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule) },
   {
