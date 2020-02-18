@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Minikit } from 'app/Model/model';
 import { SampleService } from 'app/Services/sample.service';
 import { element } from 'protractor';
@@ -45,7 +45,7 @@ export class ListMinikitComponent implements OnInit {
         console.log(res);
         this.minikit = res;
         console.log(this.minikit);
-        this.dataSource.data = this.route.snapshot.data['minikit'];
+        this.dataSource.data = this.minikit;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
@@ -71,7 +71,7 @@ export class ListMinikitComponent implements OnInit {
         console.log(res);
         // alert("Minikit deleted");
         this.toaster.success("Minikit Deleted Successfully");
-        this.ngOnInit();
+        this.getData();
       },
       (err) => {
         console.log(err);

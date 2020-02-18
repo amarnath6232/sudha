@@ -40,9 +40,7 @@ export class MiniktComponent implements OnInit {
       season: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]],
       documentoryEvidence: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]]
 
-    }
-
-    )
+    })
   }
 
   get f() {
@@ -81,8 +79,5 @@ export class MiniktComponent implements OnInit {
   onPrint() {
     window.print();
   }
-
-
-
 
 }

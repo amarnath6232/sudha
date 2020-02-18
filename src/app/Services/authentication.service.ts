@@ -28,13 +28,12 @@ export class AuthenticationService {
     this.decodeToken();
   }
 
-
   getJwtToken(): string {
     return this.token;
   }
 
   refreshToken(): Observable<any> {
-    return this.http.get<any>(`${this.ip.ip}:3000/security/refreshToken/${this.decoded.user}`).pipe(take(1), tap(res => {
+    return this.http.get<any>(`${this.ip.ip}:3000/security/refreshToken/${this.decoded.email}`).pipe(take(1), tap(res => {
       console.log(res);
       if (res) {
         this.refresh_Token = res['token'];

@@ -12,21 +12,23 @@ export class Toaster {
     success(message: string) {
         $.notifyClose();
         $.notify({
-            icon: "add-alert",
+            title: 'Success',
             message: message
         }, {
             type: 'success',
             timer: timer,
             placement: placement,
-            template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-                '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-                '<i class="material-icons" data-notify="icon">check</i> ' +
-                '<span data-notify="title">{1}</span> ' +
-                '<span data-notify="message">{2}</span>' +
-                '<div class="progress" data-notify="progressbar">' +
-                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" style="color:white;" data-notify="dismiss">×</button>' +
+                '<div class="col-12 p-0">' +
+                '<div class="row">' +
+                '<div class="col-2 p-0 d-flex justify-content-center"><i class="material-icons" style="font-size: 2.5rem;color: whitesmoke;">check</i></div>' +
+                '<div class="col-10 p-0">' +
+                '<span data-notify="title"><strong>{1}</strong></span>' +
+                '<span data-notify="message" style="font-size:80%;">{2}</span>' +
                 '</div>' +
-                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                '</div>' +
+                '</div>' +
                 '</div>'
         });
     }
@@ -34,43 +36,46 @@ export class Toaster {
     error(message: string) {
         $.notifyClose();
         $.notify({
-            icon: "add_alert",
+            title: 'Error',
             message: message
         }, {
             type: 'danger',
             timer: timer,
             placement: placement,
-            template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-                '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-                '<i class="material-icons" data-notify="icon">error_outline</i> ' +
-                '<span data-notify="title">{1}</span> ' +
-                '<span data-notify="message">{2}</span>' +
-                '<div class="progress" data-notify="progressbar">' +
-                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" style="color:white;" data-notify="dismiss">×</button>' +
+                '<div class="col-12 p-0">' +
+                '<div class="row">' +
+                '<div class="col-2 p-0 d-flex justify-content-center"><i class="material-icons" style="font-size: 2.5rem;color: whitesmoke;">error_outline</i></div>' +
+                '<div class="col-10 p-0">' +
+                '<span data-notify="title">{1}</span>' +
+                '<span data-notify="message" style="font-size:80%;">{2}</span>' +
                 '</div>' +
-                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                '</div>' +
+                '</div>' +
                 '</div>'
         });
     }
 
     warning(message: string) {
-        $.notifyClose();
         $.notify({
-            icon: "add_alert",
+            title: 'Warning',
             message: message
         }, {
             type: 'warning',
             timer: timer,
             placement: placement,
-            template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-                '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-                '<i class="material-icons">warning</i> ' +
-                '<span data-notify="title">{1}</span> ' +
-                '<span data-notify="message">{2}</span>' +
-                '<div class="progress" data-notify="progressbar">' +
-                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" style="color:white;" data-notify="dismiss">×</button>' +
+                '<div class="col-12 p-0">' +
+                '<div class="row">' +
+                '<div class="col-2 p-0 d-flex justify-content-center"><i class="material-icons" style="font-size: 2.5rem;color: whitesmoke;">warning</i></div>' +
+                '<div class="col-10 p-0">' +
+                '<span data-notify="title">{1}</span>' +
+                '<span data-notify="message" style="font-size:80%;">{2}</span>' +
                 '</div>' +
-                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                '</div>' +
+                '</div>' +
                 '</div>'
         });
     }

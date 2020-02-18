@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { signUp } from 'app/Model/model';
 import { SampleService } from 'app/Services/sample.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -43,9 +43,9 @@ export class TableListComponent implements OnInit {
     this.sample.getUser().subscribe(
       (res) => {
         console.log(res);
-        this.userData = res;
+        this.userData = res['data'];
         console.log(this.userData);
-        this.dataSource.data = this.route.snapshot.data['userData'];
+        this.dataSource.data = this.userData;
         this.dataSource.paginator = this.paginator;
         console.log(this.paginator);
         this.dataSource.sort = this.sort;
@@ -66,6 +66,7 @@ export class TableListComponent implements OnInit {
     this.name = userData.name;
     this.email = userData.email
   }
+
   delete(id) {
     this.sample.deleteUser(id).subscribe(res => {
       console.log(res);

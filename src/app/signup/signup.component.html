@@ -45,6 +45,25 @@
               </div>
             </span>
 
+            <!-- Phone number -->
+            <span class="bmd-form-group">
+              <div class="input-group my-3">
+                <div class="input-group-prepend"><span class="input-group-text"><i
+                      class="material-icons">call</i></span>
+                </div>
+                <input class="form-control" placeholder="PhoneNumber" type="tel" autocomplete="off"
+                  formControlName="phoneNumber" minlength="10" maxlength="10" appNumbersOnly>
+              </div>
+              <div *ngIf="f.phoneNumber.invalid && f.phoneNumber.touched" class="text-danger">
+                <div *ngIf="f.phoneNumber.errors?.required">
+                  <small>Phone Number is required</small>
+                </div>
+                <!-- <div *ngIf="f.phoneNumber.errors?.pattern">
+                  <small>mail must be valid email</small>
+                </div> -->
+              </div>
+            </span>
+
             <!-- email -->
             <span class="bmd-form-group">
               <div class="input-group my-3">
@@ -67,24 +86,7 @@
                 <small>{{emailexistError}}</small>
               </div>
             </span>
-            <!-- Phone number -->
-            <span class="bmd-form-group">
-              <div class="input-group my-3">
-                <div class="input-group-prepend"><span class="input-group-text"><i
-                      class="material-icons">call</i></span>
-                </div>
-                <input class="form-control" placeholder="PhoneNumber" type="phoneNumber" autocomplete="off"
-                  formControlName="phoneNumber" minlength="10" maxlength="10" appNumbersOnly>
-              </div>
-              <div *ngIf="f.phoneNumber.invalid && f.phoneNumber.touched" class="text-danger">
-                <div *ngIf="f.phoneNumber.errors?.required">
-                  <small>Phone Number is required</small>
-                </div>
-                <!-- <div *ngIf="f.phoneNumber.errors?.pattern">
-                  <small>mail must be valid email</small>
-                </div> -->
-              </div>
-            </span>
+            
             <!-- password -->
             <span class="bmd-form-group">
               <div class="input-group my-3">
@@ -148,7 +150,7 @@
                 routerLinkActive="router-link-active"> Sign In </button>
             </div>
             <div class="card-footer">
-              <button class="btn btn-rose btn-link btn-lg" [disabled]="signupForm.invalid || alreadyExistEmail">
+              <button class="btn btn-rose btn-link btn-lg" [disabled]="signupForm.invalid || alreadyExistEmail || spin">
                 <span *ngIf="spin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Sign Up
               </button>

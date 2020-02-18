@@ -42,7 +42,7 @@ export class SigninComponent implements OnInit {
     if (!this.LoginForm.invalid) {
       this.auth.authenticate(this.LoginForm.controls['email'].value, this.LoginForm.controls['password'].value).subscribe(
         (res) => {
-          if(res){
+          if (res) {
             this.toaster.success("log In successfull");
             this.router.navigate(['/dashboard']);
           }
