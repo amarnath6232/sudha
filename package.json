@@ -40,7 +40,7 @@
     "core-js": "3.6.4",
     "express": "4.17.1",
     "googleapis": "47.0.0",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "jwt-decode": "^2.2.0",
     "moment": "2.24.0",
     "ng-connection-service": "^1.0.4",
