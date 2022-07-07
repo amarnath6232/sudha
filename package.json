@@ -42,7 +42,7 @@
     "googleapis": "47.0.0",
     "jquery": "3.4.1",
     "jwt-decode": "^2.2.0",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "ng-connection-service": "^1.0.4",
     "perfect-scrollbar": "1.5.0",
     "popper.js": "1.16.1",
